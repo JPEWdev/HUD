@@ -26,7 +26,8 @@
 
 #include "obd_pid.h"
 
-typedef void (*ELM327_data_clbk)(obd_pid_t8 pid, uint8_t const *data);
+typedef void (*ELM327_data_clbk)(obd_pid_t8 pid, uint8_t const *data,
+        uint8_t len);
 typedef void (*ELM327_no_data_clbk)(obd_pid_t8 pid);
 
 typedef struct {

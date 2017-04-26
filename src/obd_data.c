@@ -28,7 +28,7 @@
 #define RPM_ROUND (100 * 4)
 #define SPEED_HYST (2)
 
-typedef void (*data_proc_type)(uint8_t const *data);
+typedef void (*data_proc_type)(uint8_t const *data, uint8_t len);
 
 struct speed_cal_type {
     uint8_t in_spd;
@@ -115,20 +115,27 @@ OBD_is_valid(obd_pid_t8 pid)
 }
 
 static void
-set_engn_load(uint8_t const *data)
+set_engn_load(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_engn_load = ((uint16_t)data[0] * 100) / 255;
 }
 
 static void
-set_engn_clnt_temp(uint8_t const *data)
+set_engn_clnt_temp(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_engn_clnt_temp = (int16_t)data[0] - 40;
 }
 
 static void
-set_rpm(uint8_t const *data)
+set_rpm(uint8_t const *data, uint8_t len)
 {
+    if (len < 2)
+        return;
+
     my_rpm = ((uint16_t)data[0] << 8) | data[1];
     my_rpm = my_rpm / (RPM_ROUND / 2);
 
@@ -143,39 +150,51 @@ set_rpm(uint8_t const *data)
 }
 
 static void
-set_speed(uint8_t const *data)
+set_speed(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_speed = data[0];
 }
 
 static void
-set_MAF_rate(uint8_t const *data)
+set_MAF_rate(uint8_t const *data, uint8_t len)
 {
+    if (len < 2)
+        return;
     my_MAF_rate = (((uint16_t)data[0] << 8) | data[1]) / 100.0f;
 }
 
 
 static void
-set_fuel_lvl(uint8_t const *data)
+set_fuel_lvl(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_fuel_lvl = (100 * (uint16_t)data[0]) / 255;
 }
 
 static void
-set_baro_pres(uint8_t const *data)
+set_baro_pres(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_baro_pres = data[0];
 }
 
 static void
-set_air_temp(uint8_t const *data)
+set_air_temp(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_air_temp = ((int16_t)data[0]) - 40;
 }
 
 static void
-set_intake_manifold_pres(uint8_t const *data)
+set_intake_manifold_pres(uint8_t const *data, uint8_t len)
 {
+    if (len < 1)
+        return;
     my_intake_manifold_pres = data[0];
 }
 
@@ -257,10 +276,10 @@ STATIC_ASSERT(cnt_of_array(data_procs) == OBD_PID_CNT);
 STATIC_ASSERT(OBD_PID_CNT == 0x47);
 
 static void
-data_clbk(obd_pid_t8 pid, uint8_t const *data)
+data_clbk(obd_pid_t8 pid, uint8_t const *data, uint8_t len)
 {
     if (pid < OBD_PID_CNT && data_procs[pid]) {
-        data_procs[pid](data);
+        data_procs[pid](data, len);
         data_valid[pid] = true;
     }
 }

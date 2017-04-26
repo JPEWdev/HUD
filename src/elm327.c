@@ -66,84 +66,6 @@
 
 static const char endl[] = ENDL;
 
-static const struct {
-    uint8_t data_bytes;
-} pid_table[] = {
-    /* OBD_PID_SUPPORT_1                    0x00 */ { 4 },
-    /* OBD_PID_MONITOR_STATUS               0x01 */ { 4 },
-    /* OBD_PID_FREEZE_DTC                   0x02 */ { 8 },
-    /* OBD_PID_FUEL_SYS_STATUS              0x03 */ { 2 },
-    /* OBD_PID_ENGN_LOAD                    0x04 */ { 1 },
-    /* OBD_PID_ENGN_CLNT_TEMP               0x05 */ { 1 },
-    /* OBD_PID_SHORT_FUEL_TRIM_1            0x06 */ { 1 },
-    /* OBD_PID_LONG_FUEL_TRIM_1             0x07 */ { 1 },
-    /* OBD_PID_SHORT_FUEL_TRIM_2            0x08 */ { 1 },
-    /* OBD_PID_LONG_FUEL_TRIM_2             0x09 */ { 1 },
-    /* OBD_PID_FUEL_PRES                    0x0A */ { 1 },
-    /* OBD_PID_INTAKE_ABS_PRES              0x0B */ { 1 },
-    /* OBD_PID_ENGN_RPM                     0x0C */ { 2 },
-    /* OBD_PID_SPEED                        0x0D */ { 1 },
-    /* OBD_PID_TIMING_ADV                   0x0E */ { 1 },
-    /* OBD_PID_INTAKE_AIR_TEMP              0x0F */ { 1 },
-    /* OBD_PID_MAF_RATE                     0x10 */ { 2 },
-    /* OBD_PID_THROTTLE_POS                 0x11 */ { 1 },
-    /* OBD_PID_CMD_SEC_AIR_STAT             0x12 */ { 1 },
-    /* OBD_PID_O2_PRESENT_1                 0x13 */ { 1 },
-    /* OBD_PID_O2_V_BANK_1_S_1              0x14 */ { 2 },
-    /* OBD_PID_O2_V_BANK_1_S_2              0x15 */ { 2 },
-    /* OBD_PID_O2_V_BANK_1_S_3              0x16 */ { 2 },
-    /* OBD_PID_O2_V_BANK_1_S_4              0x17 */ { 2 },
-    /* OBD_PID_O2_V_BANK_2_S_1              0x18 */ { 2 },
-    /* OBD_PID_O2_V_BANK_2_S_2              0x19 */ { 2 },
-    /* OBD_PID_O2_V_BANK_2_S_3              0x1A */ { 2 },
-    /* OBD_PID_O2_V_BANK_2_S_4              0x1B */ { 2 },
-    /* OBD_PID_OBD_STANDARDS                0x1C */ { 1 },
-    /* OBD_PID_O2_PRESENT_2                 0x1D */ { 1 },
-    /* OBD_PID_AUX_INPUT_STAT               0x1E */ { 1 },
-    /* OBD_PID_RUN_TIME                     0x1F */ { 2 },
-    /* OBD_PID_SUPPORT_2                    0x20 */ { 4 },
-    /* OBD_PID_DIST_W_MIL,                  0x21 */ { 2 },
-    /* OBD_PID_FUEL_RAIL_PRES,              0x22 */ { 2 },
-    /* OBD_PID_FUEL_RAIL_PRES_DSL,          0x23 */ { 2 },
-    /* OBD_PID_O2S1_WR_LAMBDA_V,            0x24 */ { 4 },
-    /* OBD_PID_O2S2_WR_LAMBDA_V,            0x25 */ { 4 },
-    /* OBD_PID_O2S3_WR_LAMBDA_V,            0x26 */ { 4 },
-    /* OBD_PID_O2S4_WR_LAMBDA_V,            0x27 */ { 4 },
-    /* OBD_PID_O2S5_WR_LAMBDA_V,            0x28 */ { 4 },
-    /* OBD_PID_O2S6_WR_LAMBDA_V,            0x29 */ { 4 },
-    /* OBD_PID_O2S7_WR_LAMBDA_V,            0x2A */ { 4 },
-    /* OBD_PID_O2S8_WR_LAMBDA_V,            0x2B */ { 4 },
-    /* OBD_PID_CMNDED_EGR,                  0x2C */ { 1 },
-    /* OBD_PID_EGR_ERROR,                   0x2D */ { 1 },
-    /* OBD_PID_CMND_EVAP_PURGE,             0x2E */ { 1 },
-    /* OBD_PID_FUEL_LVL_INPUT,              0x2F */ { 1 },
-    /* OBD_PID_NUM_WARM_UPS_SINCE_CLEAR,    0x30 */ { 1 },
-    /* OBD_PID_DIST_SINCE_CLEAR,            0x31 */ { 2 },
-    /* OBD_PID_EVAP_PRES,                   0x32 */ { 2 },
-    /* OBD_PID_BARO_PRES,                   0x33 */ { 1 },
-    /* OBD_PID_O2S1_WR_LAMBDA_I,            0x34 */ { 4 },
-    /* OBD_PID_O2S2_WR_LAMBDA_I,            0x35 */ { 4 },
-    /* OBD_PID_O2S3_WR_LAMBDA_I,            0x36 */ { 4 },
-    /* OBD_PID_O2S4_WR_LAMBDA_I,            0x37 */ { 4 },
-    /* OBD_PID_O2S5_WR_LAMBDA_I,            0x38 */ { 4 },
-    /* OBD_PID_O2S6_WR_LAMBDA_I,            0x39 */ { 4 },
-    /* OBD_PID_O2S7_WR_LAMBDA_I,            0x3A */ { 4 },
-    /* OBD_PID_O2S8_WR_LAMBDA_I,            0x3B */ { 4 },
-    /* OBD_PID_CAT_TEMP_BANK_1_S_1,         0x3C */ { 4 },
-    /* OBD_PID_CAT_TEMP_BANK_2_S_1,         0x3D */ { 4 },
-    /* OBD_PID_CAT_TEMP_BANK_1_S_2,         0x3E */ { 4 },
-    /* OBD_PID_CAT_TEMP_BANK_2_S_2,         0x3F */ { 4 },
-    /* OBD_PID_SUPPORT_3,                   0x40 */ { 4 },
-    /* OBD_PID_MONITOR_STATUS_THIS_DRIVE,   0x41 */ { 4 },
-    /* OBD_PID_CM_V,                        0x42 */ { 2 },
-    /* OBD_PID_ABS_LOAD,                    0x43 */ { 2 },
-    /* OBD_PID_FUEL_AIR_CMD_RATIO,          0x44 */ { 2 },
-    /* OBD_PID_REL_THROTTLE,                0x45 */ { 1 },
-    /* OBD_PID_AMBIENT_AIR_TEMP,            0x46 */ { 1 },
-};
-
-STATIC_ASSERT(cnt_of_array(pid_table) == OBD_PID_CNT);
-
 static const char *const dtc_prefix[] = {
     /* 0    */  "P0",
     /* 1    */  "P1",
@@ -526,7 +448,7 @@ void
 ELM327_process(bool block)
 {
     uint8_t header[2];
-    uint8_t data_buf[8];
+    uint8_t data_buf[OBD_PID_MAX_LEN];
     uint8_t data_bytes;
     char const *end;
     char const *buf;
@@ -540,26 +462,18 @@ ELM327_process(bool block)
                         == cnt_of_array(header)) {
                     printf("Header = %02x %02x" ENDL, header[0], header[1]);
 
-                    if (my_data_clbk) {
-                        if (header[1] == last_pid) {
-                            data_bytes = pid_table[header[1]].data_bytes;
-
-                            printf("Data Bytes = %i" ENDL, data_bytes);
-
-                            if (parse_hex_string(end, data_buf, data_bytes,
-                                        NULL) == data_bytes) {
-                                printf("Got data for %02x" ENDL, header[1]);
-                                my_data_clbk(header[1], data_buf);
-                                s_searching = false;
-                                s_cannot_connect = false;
-                            } else {
-                                printf("Error Parsing data from line %s" ENDL,
-                                        buf);
-                            }
-                        } else {
-                            printf("Error got data for unrequested PID 0x%02X"
-                                    ENDL, header[1]);
-                        }
+                    if (header[1] == last_pid) {
+                        data_bytes = parse_hex_string(end, data_buf,
+                                sizeof(data_buf), NULL);
+                        printf("Got %u bytes of data for %02x" ENDL,
+                                data_bytes, header[1]);
+                        if (my_data_clbk)
+                            my_data_clbk(header[1], data_buf, data_bytes);
+                        s_searching = false;
+                        s_cannot_connect = false;
+                    } else {
+                        printf("Error got data for unrequested PID 0x%02X"
+                                ENDL, header[1]);
                     }
                 } else if (strcmp(buf, "NO DATA") == 0) {
                     if (my_no_data_clbk)
@@ -717,11 +631,11 @@ static struct {
 } my_get_pid_data;
 
 static void
-get_pid_data_clbk(obd_pid_t8 pid, uint8_t const *data)
+get_pid_data_clbk(obd_pid_t8 pid, uint8_t const *data, uint8_t len)
 {
     my_get_pid_data.found = true;
-    memcpy(my_get_pid_data.buffer, data, pid_table[pid].data_bytes);
-    *my_get_pid_data.data_len = pid_table[pid].data_bytes;
+    memcpy(my_get_pid_data.buffer, data, len);
+    *my_get_pid_data.data_len = len;
 }
 
 static void
