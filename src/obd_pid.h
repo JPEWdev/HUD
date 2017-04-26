@@ -107,4 +107,9 @@ typedef uint8_t obd_pid_t8; enum {
     OBD_PID_CNT
 };
 
+/*
+ * The maximum number of data bytes in a given PID
+ */
+#define OBD_PID_MAX_LEN (8)
+
 #endif /* _OBD_PID_H_ */

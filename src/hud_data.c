@@ -195,7 +195,7 @@ calc_avg_econ(hud_data_t8 idx)
         avg_econ_rate = cont_filter(OBD_get_MAF_rate(), avg_econ_rate, ratio);
     }
 
-    set_float(idx, get_fuel_econ( avg_econ_spd, avg_econ_rate ), 1);
+    set_float(idx, get_fuel_econ(avg_econ_spd, avg_econ_rate), 1);
 
     avg_econ_updated = true;
 

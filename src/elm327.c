@@ -710,6 +710,54 @@ ELM327_get_voltage(void)
     return 0.0f;
 }
 
+static struct {
+    bool found;
+    size_t *data_len;
+    uint8_t *buffer;
+} my_get_pid_data;
+
+static void
+get_pid_data_clbk(obd_pid_t8 pid, uint8_t const *data)
+{
+    my_get_pid_data.found = true;
+    memcpy(my_get_pid_data.buffer, data, pid_table[pid].data_bytes);
+    *my_get_pid_data.data_len = pid_table[pid].data_bytes;
+}
+
+static void
+get_pid_no_data_clbk(obd_pid_t8 pid)
+{
+    my_get_pid_data.found = false;
+}
+
+static bool
+get_pid_helper(obd_pid_t8 pid, void (*rqst)(obd_pid_t8), uint8_t
+        buffer[OBD_PID_MAX_LEN], size_t *len)
+{
+    ELM327_data_clbk saved_data_clbk;
+    ELM327_no_data_clbk saved_no_data_clbk;
+
+    wait_ready();
+
+    my_get_pid_data.found = false;
+    my_get_pid_data.buffer = buffer;
+    my_get_pid_data.data_len = len;
+
+    saved_data_clbk = my_data_clbk;
+    saved_no_data_clbk = my_no_data_clbk;
+
+    my_data_clbk = get_pid_data_clbk;
+    my_no_data_clbk = get_pid_no_data_clbk;
+
+    rqst(pid);
+    ELM327_process(true);
+
+    my_data_clbk = saved_data_clbk;
+    my_no_data_clbk = saved_no_data_clbk;
+
+    return my_get_pid_data.found;
+}
+
 void
 ELM327_rqst_crnt_pid(obd_pid_t8 pid)
 {
@@ -720,6 +768,13 @@ ELM327_rqst_crnt_pid(obd_pid_t8 pid)
     send_command(buffer, false);
 }
 
+bool
+ELM327_get_crnt_pid(obd_pid_t8 pid, uint8_t buffer[OBD_PID_MAX_LEN],
+        size_t *len)
+{
+    return get_pid_helper(pid, ELM327_rqst_crnt_pid, buffer, len);
+}
+
 void
 ELM327_rqst_freeze_pid(obd_pid_t8 pid)
 {
@@ -728,6 +783,13 @@ ELM327_rqst_freeze_pid(obd_pid_t8 pid)
     snprintf(buffer, sizeof(buffer), "%02u%02x", OBD_FREEZE_DATA, pid);
     last_pid = pid;
     send_command(buffer, false);
+}
+
+bool
+ELM327_get_freeze_pid(obd_pid_t8 pid, uint8_t buffer[OBD_PID_MAX_LEN],
+        size_t *len)
+{
+    return get_pid_helper(pid, ELM327_rqst_freeze_pid, buffer, len);
 }
 
 void

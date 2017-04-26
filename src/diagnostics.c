@@ -21,10 +21,13 @@
  */
 #include <limits.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "btn.h"
+#include "elm327.h"
 #include "layout.h"
 #include "menu.h"
+#include "obd_pid.h"
 #include "timer.h"
 #include "utl.h"
 #include "vfd.h"
@@ -110,11 +113,85 @@ done:
     return MENU_NONE;
 }
 
+static enum menu_id
+show_pid_menu(enum menu_id id, void *param)
+{
+    obd_pid_t8 pid = id;
+    uint8_t buffer[OBD_PID_MAX_LEN];
+    size_t len;
+    size_t i;
+
+    VFD_soft_reset();
+    VFD_char_width(VFD_CHAR_WDTH_FIXED_1);
+    VFD_printf("PID 0x%02x:", pid);
+    VFD_set_cursor(0, 1);
+
+    if (ELM327_get_crnt_pid(pid, buffer, &len)) {
+        for(i = 0; i < len; i++ )
+            VFD_printf("%02x ", buffer[i]);
+    } else {
+        VFD_printf("No Data");
+    }
+
+    BTN_wait(10000);
+
+    VFD_soft_reset();
+    return MENU_NONE;
+}
+
+static struct menu_type pid_menu_items[OBD_PID_CNT + 1];
+static char pid_menu_text[OBD_PID_CNT][5];
+static size_t pid_menu_count;
+
+static void
+add_pid_menu(obd_pid_t8 pid)
+{
+    snprintf(pid_menu_text[pid_menu_count],
+            sizeof(pid_menu_text[pid_menu_count]), "0x%02x", pid);
+    pid_menu_items[pid_menu_count].id = pid;
+    pid_menu_items[pid_menu_count].string = pid_menu_text[pid_menu_count];
+    pid_menu_items[pid_menu_count].proc = show_pid_menu;
+    pid_menu_count++;
+}
+
+
+static enum menu_id
+pid_menu(enum menu_id id, void *param)
+{
+    obd_pid_t8 pid;
+    obd_pid_t8 i, j;
+    uint8_t buffer[OBD_PID_MAX_LEN];
+    size_t len;
+    enum menu_id m;
+
+    pid_menu_count = 0;
+
+    for (i = 0; i < OBD_PID_CNT; i += 32) {
+        add_pid_menu(i);
+        if(ELM327_get_crnt_pid(i, buffer, &len)) {
+            for (j = 0; j < 32 && i + j < OBD_PID_CNT; j++) {
+                pid = i + j;
+                if (buffer[j / 8] & _BV(j % 8))
+                    add_pid_menu(pid);
+            }
+        }
+    }
+    pid_menu_items[pid_menu_count].id = MENU_BACK;
+    pid_menu_items[pid_menu_count].string = "Back";
+    pid_menu_items[pid_menu_count].proc = NULL;
+    pid_menu_count++;
+
+    m = menu_process(&layout_4, pid_menu_items, pid_menu_count, 0, NULL);
+
+    return (m == MENU_TIMEOUT) ? m : MENU_NONE;
+}
+
 enum menu_id
 diagnostics_menu(enum menu_id id, void *param)
 {
     static const struct menu_type menu[] = {
         {   MENU_NONE,  "Display",  display_diagnostics_menu    },
+        {   MENU_NONE,  "PID",      pid_menu                    },
         {   MENU_BACK,  "Back",     NULL                        },
     };
 

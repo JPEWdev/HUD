@@ -91,8 +91,16 @@ ELM327_get_voltage(void);
 void
 ELM327_rqst_crnt_pid(obd_pid_t8 pid);
 
+bool
+ELM327_get_crnt_pid(obd_pid_t8 pid, uint8_t buffer[OBD_PID_MAX_LEN],
+        size_t *len);
+
 void
 ELM327_rqst_freeze_pid(obd_pid_t8 pid);
+
+bool
+ELM327_get_freeze_pid(obd_pid_t8 pid, uint8_t buffer[OBD_PID_MAX_LEN],
+        size_t *len);
 
 void
 ELM327_set_clbk(ELM327_data_clbk data_clbk, ELM327_no_data_clbk no_data_clbk);
