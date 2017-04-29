@@ -175,10 +175,13 @@ calc_rpm(hud_data_t8 idx)
 static void
 calc_inst_econ(hud_data_t8 idx)
 {
-    last_inst_econ = cont_filter(
-            get_fuel_econ(OBD_get_speed(), OBD_get_MAF_rate()),
-            last_inst_econ, INST_FUEL_CONSTANT);
-    set_float(idx, last_inst_econ, 1);
+    float maf_rate = OBD_get_MAF_rate();
+    if (maf_rate != 0.0f) {
+        last_inst_econ = cont_filter(
+                get_fuel_econ(OBD_get_speed(), maf_rate),
+                last_inst_econ, INST_FUEL_CONSTANT);
+        set_float(idx, last_inst_econ, 1);
+    }
 }
 
 static void
@@ -195,12 +198,14 @@ calc_avg_econ(hud_data_t8 idx)
         avg_econ_rate = cont_filter(OBD_get_MAF_rate(), avg_econ_rate, ratio);
     }
 
-    set_float(idx, get_fuel_econ(avg_econ_spd, avg_econ_rate), 1);
+    if (avg_econ_rate != 0.0f) {
+        set_float(idx, get_fuel_econ(avg_econ_spd, avg_econ_rate), 1);
 
-    avg_econ_updated = true;
+        avg_econ_updated = true;
 
-    if (avg_samples + 1 < MAX_AVG_SAMPLES)
-        avg_samples++;
+        if (avg_samples + 1 < MAX_AVG_SAMPLES)
+            avg_samples++;
+    }
 }
 
 static void
