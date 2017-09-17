@@ -71,7 +71,7 @@ MCU=atmega644p
 # (use a single word, e.g. 'myproject')
 PROJECTNAME=hud
 
-CLOCK_SPEED=16000000
+CLOCK_SPEED=10000000
 
 AVRDUDE_SPEED=1.1
 

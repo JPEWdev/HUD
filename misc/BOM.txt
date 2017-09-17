@@ -1,34 +1,36 @@
-Qty	Value	Device	Package	Part	Description	Digikey PN	Link
-1	680uF	1000UF-25V(PTH)	CPOL-RADIAL-1000UF-25V	C13	CAP-08070	493-1744-ND	https://www.digikey.com/short/3w5218
-8	0.1uF	560PF-50V-5%(0603)	0603-CAP	C4,C7,C8,C11,C12,C14,C15,C16	CAP-08749	490-1532-1-ND	http://www.digikey.com/short/3f834t
-2	13pF	560PF-50V-5%(0603)	0603-CAP	C9,C10	CAP-08749	490-1406-1-ND	http://www.digikey.com/short/3ft1m7
-2	27pf	560PF-50V-5%(0603)	0603-CAP	C1,C2	CAP-08749	399-7888-1-ND	http://www.digikey.com/short/3ft149
-2	560pF	560PF-50V-5%(0603)	0603-CAP	C3,C6	CAP-08749	1276-1278-1-ND	http://www.digikey.com/short/3ft14w
-1	ATMEGA644A	ATMEGA644A	TQFP44	IC1	8-bit Microcontroller with 64K Bytes In-System Programmable Flash	ATMEGA644PA-AU-ND	http://www.digikey.com/short/3ft1m9
-1	AVR_SPI	AVR_SPI_PRG_6PTH	2X3	J1	AVR ISP 6 Pin	SAM1114-03-ND	http://www.digikey.com/short/3ft1mw
-1	100uF	CAP_POLPTH1	CPOL-RADIAL-100UF-25V	C5	Capacitor Polarized	493-1548-ND	http://www.digikey.com/short/3ft140
-1	16 MHz	CRYSTAL-GROUNDED3.2X2.5	CRYSTAL-SMD-3.2X2.5	X1		SER4069CT-ND	http://www.digikey.com/short/3f83m1
-1	4MHz	CRYSTALHC49US	HC49US	Y3	Various standard crystals. Proven footprints.	XC1735-ND	http://www.digikey.com/short/3f83hc
-1	ODB-2	DB9MALE	DB9_MALE	JP3	DB9 Connector	A32091-ND	http://www.digikey.com/short/3ft1md
-1	24V	DIODE-TVS16V	SOD-123	D9	Zener Diode	641-1660-1-ND	https://www.digikey.com/short/3w52dc
-2	7V	DIODE-TVS16V	SOD-123	D10,D11	Zener Diode	F7470CT-ND	https://www.digikey.com/short/3w58rp
-1	ELM329SOP	ELM329SOP	SO28W	U$4			https://www.elmelectronics.com/ic/elm329/
-1	150uH	INDUCTORPWR	CDRH125	L1	Inductors	308-1938-1-ND	http://www.digikey.com/short/3f3b4h
-8	GREEN	LED-GREENLARGE	LED-1206	D2,D3,D4,D5,D6,D7,D8,D12	Various green LEDs	404-1046-1-ND	http://www.digikey.com/short/3ft1m4
-1	LM2576	LM2576S	TO263-5	IC2	Texas Instruments LM2576 Simple Switcher	LM2576SX-5.0/NOPBCT-ND	http://www.digikey.com/short/3ft1mr
-1		M02LOCK	1X02_LOCK	JP4	Standard 2-pin 0.1" header. Use with		
-1	BUTTONS	M05LOCK	1X05_LOCK	JP1	Header 5		
-1	DISPLAY	M07LOCK	1X07_LOCK	JP5	Header 7		
-1	MCP2561SOP	MCP2561SOP	SO08	U$2		MCP2561-E/SN-ND	http://www.digikey.com/short/3f83mn
-1		NPNSOT323	SOT323	T1	NPN TRANSISTOR	MMST3904-FDICT-ND	https://www.digikey.com/short/3w58f5
-2	100	RESISTOR0603-RES	0603-RES	R7,R8	Resistor	311-100HRCT-ND	https://www.digikey.com/short/3w9t3m
-8	470	RESISTOR0603-RES	0603-RES	R1,R2,R3,R4,R5,R6,R11,R16	Resistor	311-470HRCT-ND	https://www.digikey.com/short/3w9t34
-2	10K	RESISTOR0603-RES	0603-RES	R10,R13	Resistor	311-10KGRCT-ND	https://www.digikey.com/short/3w9t3d
-1	127K	RESISTOR0603-RES	0603-RES	R12	Resistor	311-127KHRCT-ND	https://www.digikey.com/short/3w9tqj
-1	20K	RESISTOR0603-RES	0603-RES	R14,R15	Resistor	311-20KGRCT-ND	https://www.digikey.com/short/3w9tqt
-1	47K	RESISTOR0603-RES	0603-RES	R9	Resistor	311-47KGRCT-ND	https://www.digikey.com/short/3w9tqc
-1	1N5822	SCHOTTKY-DIODEDO201T15	DO201T15	D1	Schottky Diode	1N5822-TPMSCT-ND	http://www.digikey.com/short/3ft1mq
-2	SWITCH-MOMENTARY-2SMD-4	SWITCH-MOMENTARY-2SMD-4	TACTILE_SWITCH_TALL	S2,S4	Various NO switches- pushbuttons, reed, etc	CKN9112CT-ND	http://www.digikey.com/short/3f83mf
-1		SWITCH-SPDTPTH	SWITCH-SPDT	S1	SPDT Switch	360-2133-ND	http://www.digikey.com/short/3f83mh
-1	TPS27082LDDCRDDC6-M	TPS27082LDDCRDDC6-M	DDC6-M	U$1		296-35595-1-ND	http://www.digikey.com/short/3f83m2
-1	DISPLAY	GU140X16G-7003			VFD Display	286-1035-ND	https://www.digikey.com/short/3n3hrh
+Qty	Value	Device	Package	Parts	Digikey PN	Link
+13	0.1uF	560PF-50V-5%(0603)	0603-CAP	C4  C7  C8  C11  C12  C13  C14  C15  C16  C17  C18  C20  C23	490-1532-1-ND	http://www.digikey.com/short/3f834t
+2	13pF	560PF-50V-5%(0603)	0603-CAP	C9  C10	490-1406-1-ND	http://www.digikey.com/short/3ft1m7
+1	2.2uF	560PF-50V-5%(0603)	0603-CAP	C21	445-6933-1-ND	https://www.digikey.com/short/qq177z
+2	27pf	560PF-50V-5%(0603)	0603-CAP	C1  C2	399-7888-1-ND	http://www.digikey.com/short/3ft149
+1	4.7pF	560PF-50V-5%(0603)	0603-CAP	C19	712-1172-1-ND 	https://www.digikey.com/short/qqv1ft
+2	560pF	560PF-50V-5%(0603)	0603-CAP	C3  C6	1276-1278-1-ND 	https://www.digikey.com/short/qqv1fh
+1	ATMEGA644A	ATMEGA644A	TQFP44	IC1	ATMEGA644PA-AU-ND	http://www.digikey.com/short/3ft1m9
+1	AVR_SPI	AVR_SPI_PRG_6PTH	2X3	J1	952-2121-ND	https://www.digikey.com/short/qq1775
+1	47uF	C-EUC1206	C1206	C5	490-8337-1-ND 	https://www.digikey.com/short/qqv12q
+1	2.2uF	C-EUC1206	C1206	C22	490-3368-1-ND	https://www.digikey.com/short/q7qn09
+1	10 MHz	CRYSTAL-GROUNDED3.2X2.5	CRYSTAL-SMD-3.2X2.5	X1	887-1791-1-ND 	http://www.digikey.com/short/qcp8f8
+1	4MHz	CRYSTALSM49	SM49	Q1	535-9085-1-ND	https://www.digikey.com/short/qqv124
+1	ODB-2	DB9MALE	DB9_MALE	JP3	182-809ME-ND	https://www.digikey.com/short/qqv122
+3	24V	DIODE-TVS16V	SOD-123	D9  D10  D11	F5823CT-ND 	https://www.digikey.com/short/qqv1w7
+1	ELM329SOP	ELM329SOP	SO28W	U$4		
+1	22uH	L-USPIS2816	PIS2816	L1	513-1532-1-ND	https://www.digikey.com/short/qqv1nr
+8	GREEN	LED-GREENLARGE	LED-1206	D2  D3  D4  D5  D6  D7  D8  D12	404-1046-1-ND	http://www.digikey.com/short/3ft1m4
+1	LT8631	LT8631	TSSOP20	U$1	LT8631IFE#PBF-ND	https://www.digikey.com/short/qqv1dj
+1	BUTTONS	M05LOCK	1X05_LOCK	JP1		
+1	MCP1825S-3002E/DB	MCP1825S-3002E/DB	SOT-223_3MC	U5	MCP1825ST-3302E/DBDKR-ND	https://www.digikey.com/short/qqv103
+1	MCP2561SOP	MCP2561SOP	SO08	U$2	MCP2561-E/SN-ND	http://www.digikey.com/short/3f83mn
+3		NPNSOT323	SOT323	T1  T2  T3	MMST3904-FDICT-ND	https://www.digikey.com/short/3w58f5
+2	100	RESISTOR0603-RES	0603-RES	R7  R8	311-100HRCT-ND	https://www.digikey.com/short/3w9t3m
+2	10K	RESISTOR0603-RES	0603-RES	R10  R13	311-10KGRCT-ND	https://www.digikey.com/short/3w9t3d
+1	191K	RESISTOR0603-RES	0603-RES	R21	P191KDBCT-ND	https://www.digikey.com/short/qqv1vz
+1	1M	RESISTOR0603-RES	0603-RES	R20	A119955CT-ND	https://www.digikey.com/short/qqv1v9
+6	20K	RESISTOR0603-RES	0603-RES	R12  R14  R15  R17  R18  R19	RR08P20.0KDCT-ND	https://www.digikey.com/short/qqv112
+1	25.5K	RESISTOR0603-RES	0603-RES	R22	311-25.5KHRCT-ND	https://www.digikey.com/short/qqv11v
+2	34	RESISTOR0603-RES	0603-RES	R6  R16	311-34.0HRCT-ND	https://www.digikey.com/short/qq1ccm
+6	470	RESISTOR0603-RES	0603-RES	R1  R2  R3  R4  R5  R11	RR08P470DCT-ND	https://www.digikey.com/short/qq1cc5
+1	47K	RESISTOR0603-RES	0603-RES	R9	P47KDBCT-ND	https://www.digikey.com/short/qq1c12
+4	SN74LVC1T45DBVR	SN74LVC1T45DBVR	DBV6	U1  U2  U3  U4	296-16843-1-ND	https://www.digikey.com/short/qq1c10
+2	SWITCH-MOMENTARY-2SMD-4	SWITCH-MOMENTARY-2SMD-4	TACTILE_SWITCH_TALL	S2  S4	CKN9112CT-ND	http://www.digikey.com/short/3f83mf
+1		SWITCH-SPDTPTH	SWITCH-SPDT	S1	360-2133-ND	http://www.digikey.com/short/3f83mh
+1		LCD OLED GRAPHIC 256 X 64 BLUE			NHD-3.12-25664UCB2-ND	https://www.digikey.com/short/q78884
