@@ -1,6 +1,8 @@
 *.swp
 *~
 *.exe
+*.b#*
+*.s#*
 avr_tags
 tags
 .directory
