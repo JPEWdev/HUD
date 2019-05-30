@@ -45,6 +45,7 @@ static uint8_t my_fuel_lvl;
 static uint8_t my_baro_pres;
 static int16_t my_air_temp;
 static uint8_t my_intake_manifold_pres;
+static int16_t my_engn_oil_temp;
 
 static bool data_valid[ OBD_PID_CNT ];
 
@@ -106,6 +107,12 @@ uint8_t
 OBD_get_intake_manifold_pres(void)
 {
     return my_intake_manifold_pres;
+}
+
+int16_t
+OBD_get_engn_oil_temp(void)
+{
+    return my_engn_oil_temp;
 }
 
 bool
@@ -198,82 +205,26 @@ set_intake_manifold_pres(uint8_t const *data, uint8_t len)
     my_intake_manifold_pres = data[0];
 }
 
-static const data_proc_type data_procs[] = {
-    /* OBD_PID_SUPPORT_1                */  NULL,
-    /* OBD_PID_MONITOR_STATUS           */  NULL,
-    /* OBD_PID_FREEZE_DTC               */  NULL,
-    /* OBD_PID_FUEL_SYS_STATUS          */  NULL,
-    /* OBD_PID_ENGN_LOAD                */  set_engn_load,
-    /* OBD_PID_ENGN_CLNT_TEMP           */  set_engn_clnt_temp,
-    /* OBD_PID_SHORT_FUEL_TRIM_1        */  NULL,
-    /* OBD_PID_LONG_FUEL_TRIM_1         */  NULL,
-    /* OBD_PID_SHORT_FUEL_TRIM_2        */  NULL,
-    /* OBD_PID_LONG_FUEL_TRIM_2         */  NULL,
-    /* OBD_PID_FUEL_PRES                */  NULL,
-    /* OBD_PID_INTAKE_ABS_PRES          */  set_intake_manifold_pres,
-    /* OBD_PID_ENGN_RPM                 */  set_rpm,
-    /* OBD_PID_SPEED                    */  set_speed,
-    /* OBD_PID_TIMING_ADV               */  NULL,
-    /* OBD_PID_INTAKE_AIR_TEMP          */  NULL,
-    /* OBD_PID_MAF_RATE                 */  set_MAF_rate,
-    /* OBD_PID_THROTTLE_POS             */  NULL,
-    /* OBD_PID_CMD_SEC_AIR_STAT         */  NULL,
-    /* OBD_PID_O2_PRESENT_1             */  NULL,
-    /* OBD_PID_O2_V_BANK_1_S_1          */  NULL,
-    /* OBD_PID_O2_V_BANK_1_S_2          */  NULL,
-    /* OBD_PID_O2_V_BANK_1_S_3          */  NULL,
-    /* OBD_PID_O2_V_BANK_1_S_4          */  NULL,
-    /* OBD_PID_O2_V_BANK_2_S_1          */  NULL,
-    /* OBD_PID_O2_V_BANK_2_S_2          */  NULL,
-    /* OBD_PID_O2_V_BANK_2_S_3          */  NULL,
-    /* OBD_PID_O2_V_BANK_2_S_4          */  NULL,
-    /* OBD_PID_OBD_STANDARDS            */  NULL,
-    /* OBD_PID_O2_PRESENT_2             */  NULL,
-    /* OBD_PID_AUX_INPUT_STAT           */  NULL,
-    /* OBD_PID_RUN_TIME                 */  NULL,
-    /* OBD_PID_SUPPORT_2                */  NULL,
-    /* OBD_PID_DIST_W_MIL               */  NULL,
-    /* OBD_PID_FUEL_RAIL_PRES           */  NULL,
-    /* OBD_PID_FUEL_RAIL_PRES_DSL       */  NULL,
-    /* OBD_PID_O2S1_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S2_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S3_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S4_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S5_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S6_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S7_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_O2S8_WR_LAMBDA_V         */  NULL,
-    /* OBD_PID_CMNDED_EGR               */  NULL,
-    /* OBD_PID_EGR_ERROR                */  NULL,
-    /* OBD_PID_CMND_EVAP_PURGE          */  NULL,
-    /* OBD_PID_FUEL_LVL_INPUT           */  set_fuel_lvl,
-    /* OBD_PID_NUM_WARM_UPS_SINCE_CLEAR */  NULL,
-    /* OBD_PID_DIST_SINCE_CLEAR         */  NULL,
-    /* OBD_PID_EVAP_PRES                */  NULL,
-    /* OBD_PID_BARO_PRES                */  set_baro_pres,
-    /* OBD_PID_O2S1_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S2_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S3_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S4_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S5_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S6_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S7_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_O2S8_WR_LAMBDA_I         */  NULL,
-    /* OBD_PID_CAT_TEMP_BANK_1_S_1      */  NULL,
-    /* OBD_PID_CAT_TEMP_BANK_2_S_1      */  NULL,
-    /* OBD_PID_CAT_TEMP_BANK_1_S_2      */  NULL,
-    /* OBD_PID_CAT_TEMP_BANK_2_S_2      */  NULL,
-    /* OBD_PID_SUPPORT_3                */  NULL,
-    /* OBD_PID_MONITOR_STATUS           */  NULL,
-    /* OBD_PID_CM_V                     */  NULL,
-    /* OBD_PID_ABS_LOAD                 */  NULL,
-    /* OBD_PID_FUEL_AIR_CMD_RATIO       */  NULL,
-    /* OBD_PID_REL_THROTTLE             */  NULL,
-    /* OBD_PID_AMBIENT_AIR_TEMP         */  set_air_temp,
-    };
+static void
+set_engn_oil_temp(uint8_t const *data, uint8_t len)
+{
+    if (len < 1)
+        return;
+    my_engn_oil_temp = (int16_t)data[0] - 40;
+}
 
-STATIC_ASSERT(cnt_of_array(data_procs) == OBD_PID_CNT);
-STATIC_ASSERT(OBD_PID_CNT == 0x47);
+static const data_proc_type data_procs[OBD_PID_CNT] = {
+    [OBD_PID_ENGN_LOAD] = set_engn_load,
+    [OBD_PID_ENGN_CLNT_TEMP] = set_engn_clnt_temp,
+    [OBD_PID_INTAKE_ABS_PRES] = set_intake_manifold_pres,
+    [OBD_PID_ENGN_RPM] = set_rpm,
+    [OBD_PID_SPEED] = set_speed,
+    [OBD_PID_MAF_RATE ] = set_MAF_rate,
+    [OBD_PID_FUEL_LVL_INPUT] = set_fuel_lvl,
+    [OBD_PID_BARO_PRES] =  set_baro_pres,
+    [OBD_PID_AMBIENT_AIR_TEMP] = set_air_temp,
+    [OBD_PID_ENGN_OIL_TEMP] = set_engn_oil_temp,
+    };
 
 static void
 data_clbk(obd_pid_t8 pid, uint8_t const *data, uint8_t len)

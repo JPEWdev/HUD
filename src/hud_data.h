@@ -43,6 +43,10 @@ typedef uint8_t hud_data_t8; enum {
     HUD_DATA_AIR_TEMP_C,
     HUD_DATA_AIR_TEMP_F,
     HUD_DATA_BOOST,
+    HUD_DATA_COOLANT_TEMP_C,
+    HUD_DATA_COOLANT_TEMP_F,
+    HUD_DATA_OIL_TEMP_C,
+    HUD_DATA_OIL_TEMP_F,
 
     HUD_DATA_CNT
 };

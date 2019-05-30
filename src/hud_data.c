@@ -133,6 +133,12 @@ set_int(hud_data_t8 d, uint32_t v)
     snprintf(hud_data[d].value, sizeof(hud_data[d].value), "%lu", v);
 }
 
+static void
+set_int_F(hud_data_t8 idx, float val_C)
+{
+    set_int(idx, (int32_t)(val_C * 1.8f) + 32);
+}
+
 static float
 get_fuel_econ(float speed, float maf)
 {
@@ -260,7 +266,7 @@ calc_air_temp_C(hud_data_t8 idx)
 static void
 calc_air_temp_F(hud_data_t8 idx)
 {
-    set_int(idx, (int32_t)((float)OBD_get_air_temp() * 1.8f) + 32);
+    set_int_F(idx, OBD_get_air_temp());
 }
 
 static void
@@ -326,6 +332,30 @@ avg_econ_write_clbk(void *param)
             NULL);
 }
 
+static void
+calc_coolant_temp_C(hud_data_t8 idx)
+{
+    set_int(idx, OBD_get_engn_clnt_temp());
+}
+
+static void
+calc_coolant_temp_F(hud_data_t8 idx)
+{
+    set_int_F(idx, OBD_get_engn_clnt_temp());
+}
+
+static void
+calc_oil_temp_C(hud_data_t8 idx)
+{
+    set_int(idx, OBD_get_engn_oil_temp());
+}
+
+static void
+calc_oil_temp_F(hud_data_t8 idx)
+{
+    set_int_F(idx, OBD_get_engn_oil_temp());
+}
+
 static const obd_pid_t8 speed_pids[]        = { OBD_PID_SPEED };
 static const obd_pid_t8 rpm_pids[]          = { OBD_PID_ENGN_RPM };
 static const obd_pid_t8 fuel_econ_pids[]    = { OBD_PID_MAF_RATE, OBD_PID_SPEED };
@@ -333,6 +363,8 @@ static const obd_pid_t8 fuel_lvl_pids[]     = { OBD_PID_FUEL_LVL_INPUT };
 static const obd_pid_t8 baro_pres_pids[]    = { OBD_PID_BARO_PRES };
 static const obd_pid_t8 air_temp_pids[]     = { OBD_PID_AMBIENT_AIR_TEMP };
 static const obd_pid_t8 boost_pids[]        = { OBD_PID_BARO_PRES, OBD_PID_INTAKE_ABS_PRES };
+static const obd_pid_t8 coolant_temp_pids[] = { OBD_PID_ENGN_CLNT_TEMP };
+static const obd_pid_t8 oil_temp_pids[]     = { OBD_PID_ENGN_OIL_TEMP };
 
 static const struct data_def_type data_def[] =
 {
@@ -352,6 +384,10 @@ static const struct data_def_type data_def[] =
     /* HUD_DATA_AIR_TEMP_C      */  { _s(air_temp_pids),    calc_air_temp_C,        "Outside C"     },
     /* HUD_DATA_AIR_TEMP_F      */  { _s(air_temp_pids),    calc_air_temp_F,        "Outside F"     },
     /* HUD_DATA_BOOST           */  { _s(boost_pids),       calc_boost,             "Boost"         },
+    /* HUD_DATA_COOLANT_TEMP_C  */  { _s(coolant_temp_pids),calc_coolant_temp_C,    "Coolant C"     },
+    /* HUD_DATA_COOLANT_TEMP_F  */  { _s(coolant_temp_pids),calc_coolant_temp_F,    "Coolant F"     },
+    /* HUD_DATA_OIL_TEMP_C      */  { _s(oil_temp_pids),    calc_oil_temp_C,        "Oil C"         },
+    /* HUD_DATA_OIL_TEMP_F      */  { _s(oil_temp_pids),    calc_oil_temp_F,        "Oil F"         },
 };
 
 STATIC_ASSERT(cnt_of_array(data_def) == HUD_DATA_CNT);

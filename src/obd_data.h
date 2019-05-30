@@ -60,6 +60,9 @@ OBD_get_air_temp(void);
 uint8_t
 OBD_get_intake_manifold_pres(void);
 
+int16_t
+OBD_get_engn_oil_temp(void);
+
 bool
 OBD_is_valid(obd_pid_t8 pid);
 

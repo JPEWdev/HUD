@@ -103,6 +103,28 @@ typedef uint8_t obd_pid_t8; enum {
     OBD_PID_FUEL_AIR_CMD_RATIO,         /* 0x44, 2 bytes */
     OBD_PID_REL_THROTTLE,               /* 0x45, 1 bytes */
     OBD_PID_AMBIENT_AIR_TEMP,           /* 0x46, 1 bytes */
+    OBD_PID_ABSOLUTE_THROTTLE_POSITION_B,   /* 0x47, 1 bytes */
+    OBD_PID_ABSOLUTE_THROTTLE_POSITION_C,   /* 0x48, 1 bytes */
+    OBD_PID_ACCELERATOR_PEDAL_POSITION_D,   /* 0x49, 1 bytes */
+    OBD_PID_ACCELERATOR_PEDAL_POSITION_E,   /* 0x4A, 1 bytes */
+    OBD_PID_ACCELERATOR_PEDAL_POSITION_F,   /* 0x4B, 1 bytes */
+    OBD_PID_COMMANDED_THROTTLE_ACTUATOR,    /* 0x4C, 1 bytes */
+    OBD_PID_TIME_RUN_WITH_MIL,              /* 0x4D, 2 bytes */
+    OBD_PID_TIME_SINCE_DTC_CLEAR,           /* 0x4E, 2 bytes */
+    OBD_PID_MAX_SENSOR_VALUES_1,            /* 0x4F, 4 bytes */
+    OBD_PID_MAX_SENSOR_VALUES_2,            /* 0x50, 4 bytes */
+    OBD_PID_FUEL_TYPE,                      /* 0x51, 1 bytes */
+    OBD_PID_ETHANOL_PERCENT,                /* 0x52, 1 bytes */
+    OBD_PID_ABS_EVAP_VAPOR_PRESSURE,        /* 0x53, 2 bytes */
+    OBD_PID_EVAP_VAPOR_PRESSURE,            /* 0x54, 2 bytes */
+    OBD_PID_O2_SHORT_TRIM_BANK_1_3,         /* 0x55, 2 bytes */
+    OBD_PID_O2_LONG_TRIM_BANK_1_3,          /* 0x56, 2 bytes */
+    OBD_PID_O2_SHORT_TRIM_BANK_2_4,         /* 0x57, 2 bytes */
+    OBD_PID_O2_LONG_TRIM_BANK_2_4,          /* 0x58, 2 bytes */
+    OBD_PID_FUEL_RAIL_PRESSURE,             /* 0x59, 2 bytes */
+    OBD_PID_REL_ACCELERATOR_PEDAL_POS,      /* 0x5A, 1 bytes */
+    OBD_PID_HYBRID_BATTER_REMAINING,        /* 0x5B, 1 bytes */
+    OBD_PID_ENGN_OIL_TEMP,                  /* 0x5C, 1 bytes */
 
     OBD_PID_CNT
 };
