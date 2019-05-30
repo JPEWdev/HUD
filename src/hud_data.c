@@ -102,8 +102,10 @@ set_float(hud_data_t8 d, float v, uint8_t precision)
     char *cur;
     bool in_dec = false;
     uint8_t dec_cnt = 0;
+    char buf[50];
+    snprintf(buf, sizeof(buf), "%f", (double)v);
 
-    snprintf(hud_data[d].value, sizeof(hud_data[d].value), "%f", (double)v);
+    strlcpy(hud_data[d].value, buf, sizeof(hud_data[d].value));
 
     cur = hud_data[d].value;
 
